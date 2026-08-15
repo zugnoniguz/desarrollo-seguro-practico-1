@@ -4,7 +4,7 @@
 1. [Instalación de Visual Studio Code](#vscode)
 1. [Instalación de Docker](#docker)
 1. [Ejecución de OWASP Juice Shop](#juice-shop)
-1. [Ejecución de Crappi](#juice-shop)
+1. [Ejecución de Crappi](#crappi)
 1. [Prueba de la visualización del tráfico](#visualizacion)
 
 # Instalación de VM <a name="vm" />
