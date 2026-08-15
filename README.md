@@ -1,3 +1,5 @@
+
+
 # Instalación de VM
 
 El hypervisor que utilizaré es libvirtd, con la interfaz virt-manager, debido a
@@ -85,26 +87,31 @@ nuevo, y luego hacer lo mismo con la respuesta del servidor.
 
 <img src="./resources/burp-firefox-https-error.png" />
 
-Como Google no quiere vulnerar a sus servicios, no publica el certificado
-privado de sus páginas, y por ende BURP debe realizar esta interceptación con
-su propio certificado. Esto se puede apreciar viendo el certificado que recibe
-el navegador del proxy, que es firmado por PortSwigger (dueños de BURP).
+En HTTPS se utiliza encripción asimétrica. La clave pública es expuesta por el
+servidor, y el cliente encripta la comunicación con esta clave, que luego el
+servidor desencripta con su clave privada. Para asegurar que estas claves sean
+seguras y pertenezcan a la página a la que uno quiere acceder, se utiliza el
+concepto de Autoridades de Certificación (CAs): entidades cuyos certificados el
+navegador (o bien el SO) tiene pre-cargados. Los certificados que el navegador
+recibe son verificados, a través de su firma, con algún CA y así se garantiza
+que no ocurren ataques que cambien el certificado para interceptar el tráfico,
+ya que los CA no firman certificados para cualquiera.
+
+Precisamente esto es lo que queremos hacer: interceptar el tráfico con un
+certificado que creamos nosotros. La solución entonces sería firmar los
+certificados con la clave de algún CA que reconozca Firefox. Los que existen
+ahí, para evitar vulnerar la seguridad digital del mundo, no van a entregar sus
+certificados, ni tampoco firmar cualquier certificado que uno cree. La única
+opción entonces sería ingresar un nuevo certificado a la lista de CAs. Esto es
+justamente lo que BURP asume que sucede, como se puede apreciar en el
+certificado que le envía el proxy a Firefox.
 
 <img src="./resources/burp-firefox-https-cert.png" />
 
-La raíz del error es que Firefox recibe este certificado desconocido y asume
-que hay alguien en el medio de la comunicación y por ende no la puede
-seguir[^httpsnote]. Esto es efectivamente lo que está sucediendo, y el
-navegador está correcto en parar la comunicación. Para que se pueda seguir con
-la comunicación, Firefox debe confiar en el certificado de PortSwigger, y así
-poder encriptar la comunicación. Justamente, BURP permite exportar el
-certificado privado que utiliza el proxy para este propósito, que luega se
-puede importar en Firefox.
-
-[^httpsnote]: También Google utiliza HSTS (HTTP Strict Transport Security),
-una política que exige comunicación por HTTPS para comunicarse con el servidor.
-Si esto no estuviese habilitado se podría deshabilitar HTTPS y usar HTTP,
-obviando el problema.
+Para que se pueda seguir con la comunicación, Firefox debe confiar en el
+certificado de PortSwigger, y así poder encriptar la comunicación. Justamente,
+BURP permite exportar el certificado privado que utiliza el proxy para este
+propósito, que luega se puede importar en Firefox.
 
 <img src="./resources/burp-export-cert.png" />
 <img src="./resources/burp-import-cert-1.png" />
