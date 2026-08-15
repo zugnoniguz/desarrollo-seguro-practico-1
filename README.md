@@ -1,6 +1,13 @@
+# Índice
+1. [Instalación de VM](#vm)
+1. [Instalación de BURP](#burp)
+1. [Instalación de Visual Studio Code](#vscode)
+1. [Instalación de Docker](#docker)
+1. [Ejecución de OWASP Juice Shop](#juice-shop)
+1. [Ejecución de Crappi](#juice-shop)
+1. [Prueba de la visualización del tráfico](#visualizacion)
 
-
-# Instalación de VM
+# Instalación de VM <a name="vm" />
 
 El hypervisor que utilizaré es libvirtd, con la interfaz virt-manager, debido a
 que utilizo Linux como SO huesped, y Virtualbox tiene peor rendimiento que
@@ -39,7 +46,7 @@ acceso al sistema de archivos o el clipboard del huésped, y por ende estos
 aspectos no serán configurados, pese a que serían útiles en la utilización de
 la VM.
 
-# Instalación de BURP
+# Instalación de BURP <a name="burp" />
 
 Una vez iniciada la VM, se puede instalar el proxy de intercepción en esta.
 Para este práctico, utilizaré BURP suite, ya que viene instalado por defecto
@@ -125,7 +132,7 @@ muestra la página es el de PortSwigger, y no el original de Google.
 <img src="./resources/burp-firefox-https.png" />
 <img src="./resources/burp-firefox-https-capture.png" />
 
-# Instalación de Visual Studio Code
+# Instalación de Visual Studio Code <a name="vscode" />
 
 Para esto, se puede seguir la guía
 [aquí](https://code.visualstudio.com/docs/setup/linux) para distros basadas
@@ -161,7 +168,7 @@ sudo apt install code
 
 <img src="./resources/vscode-installed.png" />
 
-# Instalación de Docker
+# Instalación de Docker <a name="docker" />
 
 Con Docker es un procedimiento similar, se debe instalar el repo de `apt` de
 docker, y luego instalar Docker. Se seguirá la guía
@@ -227,7 +234,7 @@ sudo usermod -rG docker '<user>'
 
 <img src="./resources/docker-group-added.png" />
 
-# Ejecución de OWASP Juice Shop
+# Ejecución de OWASP Juice Shop <a name="juice-shop" />
 
 En la [página provista](https://owasp.org/www-project-juice-shop/), uno de los
 métodos de instalación indicados en el sidebar es con docker, que lleva a la
@@ -273,12 +280,12 @@ puerto que se indicó anteriormente, y Juice Shop se puede acceder en
 
 <img src="./resources/juice-shop-firefox.png" />
 
-# Ejecución de Crappi
+# Ejecución de Crappi <a name="crappi" />
 
 Usaré la guía [aquí](https://owasp.org/crAPI/)
 TODO
 
-# Prueba de la visualización del tráfico
+# Prueba de la visualización del tráfico <a name="visualizacion" />
 
 Con Juice Shop corriendo uno puede dirigirse a `http://localhost:3000` en
 Firefox, con la proxy prendida, y notar que no se ve absolutamente nada en el
