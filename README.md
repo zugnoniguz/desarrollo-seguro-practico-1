@@ -82,20 +82,20 @@ sin ningún problema, y que se puede inspeccionar el tráfico en BURP.
 <img src="./resources/burp-firefox-http-capture.png" />
 
 A su vez, esto implica que si el proxy no corre, Firefox no puede enviar el
-tráfico por el proxy, y por ende no puede enviar el tráfico a nada, y en
-la configuración por defecto.
+tráfico por el proxy, y en la configuración por defecto si el proxy no
+funciona, la solicitud falla.
 
 <img src="./resources/burp-firefox-proxy-error.png" />
 
 Sin embargo, con HTTPS directamente no se puede alcanzar al sitio. Esto es
 porque, para poder inspeccionar el tráfico HTTPS, debe hacer un MITM respecto a
-la encripción, desencriptando la solicitud del navegador, encriptándola de
+la encriptación, desencriptando la solicitud del navegador, encriptándola de
 nuevo, y luego hacer lo mismo con la respuesta del servidor.
 
 <img src="./resources/burp-firefox-https-error.png" />
 
-En HTTPS se utiliza encripción asimétrica. La clave pública es expuesta por el
-servidor, y el cliente encripta la comunicación con esta clave, que luego el
+En HTTPS se utiliza encriptación asimétrica. La clave pública es expuesta por
+el servidor, y el cliente encripta la comunicación con esta clave, que luego el
 servidor desencripta con su clave privada. Para asegurar que estas claves sean
 seguras y pertenezcan a la página a la que uno quiere acceder, se utiliza el
 concepto de Autoridades de Certificación (CAs): entidades cuyos certificados el
@@ -118,7 +118,7 @@ certificado que le envía el proxy a Firefox.
 Para que se pueda seguir con la comunicación, Firefox debe confiar en el
 certificado de PortSwigger, y así poder encriptar la comunicación. Justamente,
 BURP permite exportar el certificado privado que utiliza el proxy para este
-propósito, que luega se puede importar en Firefox.
+propósito, que luego se puede importar en Firefox.
 
 <img src="./resources/burp-export-cert.png" />
 <img src="./resources/burp-import-cert-1.png" />
@@ -172,7 +172,7 @@ sudo apt install code
 
 Con Docker es un procedimiento similar, se debe instalar el repo de `apt` de
 docker, y luego instalar Docker. Se seguirá la guía
-[aquí](https://www.debian.org/releases/stable/), instalando `docker-ce` y no la
+[aquí](https://docs.docker.com/engine/install/debian/), instalando `docker-ce` y no la
 versión de Kali porque esto recomienda hacer Docker. La replicaré aquí, para
 completitud.
 
@@ -186,7 +186,7 @@ sudo chmod a+r /etc/apt/keyrings/docker.asc
 ```
 
 Luego, se debe añadir el repo al registro de `apt`. Esta parte de la guía se
-debe modificar porque la distro no es Debian, sino que es basada en esta. La
+debe modificar porque la distro no es Debian, sino que está basada en esta. La
 manera de hacer esta modificación está descrita en la guía, pero simplemente es
 reemplazar el valor de la clave `Suites` con `trixie`, que es la última versión
 estable de Debian a la fecha de escritura.
@@ -211,7 +211,7 @@ sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 Si se intenta correr algún comando para verificar la instalación (que requiera
 permisos), se puede ver el siguiente error
 
-<img src="./resources/docker-perms-error" />
+<img src="./resources/docker-perms-error.png" />
 
 Esto indica que el daemon de Docker está efectivamente corriendo y la
 instalación fue exitosa, pero que hay algún error de permisos. El error surge
@@ -294,7 +294,7 @@ curl -L -o /tmp/crapi.zip https://github.com/OWASP/crAPI/archive/refs/heads/main
 unzip /tmp/crapi.zip
 cd crAPI-main/deploy/docker
 
-docker compose --compatibility up -d
+docker compose up -d
 ```
 
 <img src="./resources/crapi-compose.png" />
