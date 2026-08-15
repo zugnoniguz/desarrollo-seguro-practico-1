@@ -216,11 +216,12 @@ permisos), se puede ver el siguiente error
 Esto indica que el daemon de Docker está efectivamente corriendo y la
 instalación fue exitosa, pero que hay algún error de permisos. El error surge
 de que docker por defecto solo permite usar la API (y por ende correr los
-comandos) a usuarios que estén en el grupo `docker` (o a `root`). Hay 2
-soluciones al problema, o el usuario se añade al grupo `docker`, o se usa
-`root` para los comandos de Docker. En el caso de este práctico, por razones de
-practicidad y demostración, se añadirá el usuario al grupo, pero en caso de que
-esto se considere inseguro, se puede eliminar al usuario del grupo.
+comandos interesantes) a usuarios que estén en el grupo `docker` (o a
+`root`). Hay 2 soluciones al problema, o el usuario se añade al grupo `docker`,
+o se usa `root` para los comandos de Docker. En el caso de este práctico, por
+razones de practicidad y demostración, se añadirá el usuario al grupo, pero en
+caso de que esto se considere inseguro, se puede eliminar al usuario del grupo
+y usar root para cualquier comando con docker.
 
 Los comandos correspondientes son los siguientes
 
@@ -282,8 +283,26 @@ puerto que se indicó anteriormente, y Juice Shop se puede acceder en
 
 # Ejecución de Crappi <a name="crappi" />
 
-Usaré la guía [aquí](https://owasp.org/crAPI/)
-TODO
+Usaré la guía [aquí](https://owasp.org/crAPI/), que será reproducida en este
+documento por completitud.
+
+La instalación consiste en descargar el repo de github, y correr el proyecto
+usando docker compose
+
+```bash
+curl -L -o /tmp/crapi.zip https://github.com/OWASP/crAPI/archive/refs/heads/main.zip
+unzip /tmp/crapi.zip
+cd crAPI-main/deploy/docker
+
+docker compose --compatibility up -d
+```
+
+<img src="./resources/crapi-compose.png" />
+
+Esto inicia todos los servicios necesarios para correr la API, y expone la página
+principal en `http://localhost:8888`
+
+<img src="./resources/crapi-page.png" />
 
 # Prueba de la visualización del tráfico <a name="visualizacion" />
 
